@@ -1,4 +1,4 @@
-setwd("/Users/takayukitamura/Documents/R_Computing")
+setwd("/Users/takayukitamura/Documents/R_Computing/us_unemployment")
 
 library(tidyverse)
 library(ggtext)
@@ -31,7 +31,7 @@ df_longer <- df %>%
  
 df_longer %>%  
   ggplot(aes(x = date, y = unemployment, colour = category)) +
-  geom_line(size = 2) +
+  geom_line(linewidth = 2) +
   annotate("label",
            x = as.Date("2025-02-01"),
            y = c(4.6, 7.8, 10.85),
