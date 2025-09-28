@@ -6,7 +6,7 @@ library(ggtext)
 library(plotly)
 library(fredr)
 library(patchwork)
-setwd("/Users/takayukitamura/Documents/R_Computing")
+setwd("/Users/takayukitamura/Documents/R_Computing/us_unemployment")
 
 # unemploy_white <- read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf3fb&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1320&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=LNS14000003&scale=left&cosd=1954-01-01&coed=2025-07-01&line_color=%230073e6&link_values=false&line_style=solid&mark_type=none&mw=3&lw=3&ost=-99999&oet=99999&mma=0&fml=a&fq=Monthly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2025-09-01&revision_date=2025-09-01&nd=1954-01-01") %>% 
 #   rename(date = observation_date, white = LNS14000003)
@@ -45,7 +45,7 @@ df <- unrate %>%
 p1 <- df %>%
   pivot_longer(cols = c(overall, black), names_to = "group", values_to = "rate") %>%
   ggplot(aes(x = date, y = rate, color = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   annotate("label",
             x = as.Date("2025-03-01"),
             y = c(4.6, 7.75),
@@ -99,13 +99,13 @@ latest_date <-  max(unemployment_long$date)
 latest_rate <- aggregate(unemployment_rate ~ race, data = unemployment_long[unemployment_long$date == as.Date(latest_date), ], max)
 unemployment_long$race <- factor(unemployment_long$race, levels = latest_rate[order(latest_rate$unemployment_rate, decreasing = TRUE), "race"])
 
-unemployment_long%>% 
+unemployment_long %>% 
   ggplot(aes(x = date, y = unemployment_rate, group = race, colour = race)) +
   geom_line() +
-  scale_color_manual(breaks = c(FALSE, TRUE),
-                     values = c("#0079ae","red")) +
-  scale_size_manual(breaks = c(FALSE, TRUE),
-                    values = c(0.3,0.8))
+  # scale_color_manual(breaks = c(FALSE, TRUE),
+  #                    values = c("#0079ae","red")) +
+  # scale_size_manual(breaks = c(FALSE, TRUE),
+  #                   values = c(0.3,0.8)) +
   theme(
     legend.text = element_markdown(size = 20)
   )
