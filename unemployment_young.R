@@ -15,11 +15,11 @@ overall_undata <- fredr(series_id = "UNRATE") %>%
   select(date, "overall_undata" = value)
 
 yourth_undata <- fredr(series_id = "LNS14024887") %>% 
-  select(date, "yourth_undata" = value)
+  select(date, "yourth_undata" = value) 
 
 # Black unemployment
 black_unrate <- fredr(series_id = "LNS14000006") %>% 
-  select(date, "black_undata" = value)
+  select(date, "black_undata" = value) 
 
 df <- overall_undata %>% 
   left_join(yourth_undata, by = "date") %>% 
@@ -34,8 +34,8 @@ df_longer %>%
   geom_line(linewidth = 2) +
   annotate("label",
            x = as.Date("2025-02-01"),
-           y = c(4.6, 7.8, 10.85),
-           label = c("Overall: 4.3 %", "Black American: 7.5%", "16-24 Yrs: 10.5 %"),
+           y = c(4.8, 8.0, 11.0),
+           label = c("Overall: 4.4 %", "Black American: 7.5%", "16-24 Yrs: 10.4 %"),
            color = c("steelblue", "black", "firebrick"),
            hjust = c(0.35, 0.5, 0.45)) + 
   scale_color_manual(values = c("overall_undata" = "steelblue","black_undate", "yourth_undata" = "firebrick")
