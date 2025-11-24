@@ -37,7 +37,7 @@ df_longer %>%
            y = c(4.8, 8.0, 11.0),
            label = c("Overall: 4.4 %", "Black American: 7.5%", "16-24 Yrs: 10.4 %"),
            color = c("steelblue", "black", "firebrick"),
-           hjust = c(0.35, 0.5, 0.45)) + 
+           hjust = c(0.35, 0.55, 0.45)) + 
   scale_color_manual(values = c("overall_undata" = "steelblue","black_undate", "yourth_undata" = "firebrick")
                      ) +
   labs(title = "Unemployment Rates: 16-24 years old & Black American vs Overall",
@@ -53,4 +53,4 @@ df_longer %>%
     plot.caption = element_text(face = "italic", size = 8),
     legend.position = "none")
  
-ggsave("unenployment_young_black.png", width = 6, height = 5.6) 
+ggsave("unenployment_young_black.png", width = 6.5, height = 5.6) 
